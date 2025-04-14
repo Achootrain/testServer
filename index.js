@@ -4,6 +4,7 @@ const moongoose = require('mongoose')
 const app = express()
 const port = 3001
 const Students = require('./schema/Students');
+app.use(express.json())
 
 app.use(cors())
 const queryString = process.env.MONGODB_URI || "mongodb+srv://dobalam:dobalam-it4409@it4409-cluster.qopfxuo.mongodb.net/it4409-db?retryWrites=true&w=majority&appName=it4409-cluster";
@@ -61,7 +62,7 @@ app.get('/find_by_address', async (req, res) => {
 app.post('/add', async (req, res) => {
     try {
         const student = new Students({
-            StudentId: req.body.StudentId,
+            StudentId: Number(req.body.StudentId),
             Name: req.body.Name,
             Birthday: req.body.Birthday,
             Address: req.body.Address
